@@ -9,8 +9,8 @@
 #include <Keyboard.h>
 
 // Spitfire controls
-const char LEFT_MAGNETO = 'U';       // GPB0
-const char RIGHT_MAGNETO = 'u';      // GPB1
+const char LEFT_MAGNETO = '[';       // GPB0 { (SHIFT + [)
+const char RIGHT_MAGNETO = ']';      // GPB1 } (SHIFT + ])
 const char FLAPS_UP = '[';           // GPB2
 const char FLAPS_DOWN = ']';         // GPB2
 const char COFFMAN_CARTRIDGE = 'C';  // GPB3
@@ -86,7 +86,7 @@ void setup() {
   pinMode(start_button, INPUT_PULLUP);
 
   Wire.begin();
-  Serial.begin(115200);
+  Serial.begin(9600);
 
   // Safe start for testing - only start after button press
   while (digitalRead(start_button))
@@ -142,8 +142,17 @@ void handleKeypress() {
       Serial.print("1 ");
       if (buttonState != previousButtonState[button]) {
         switch (button) {
-          case 0: Keyboard.write(LEFT_MAGNETO); break;  // Latch
-          case 1: Keyboard.write(RIGHT_MAGNETO); break;
+          case 0:
+            Serial.println(KEY_LEFT_SHIFT, HEX);
+            Keyboard.press(KEY_LEFT_SHIFT);
+            Keyboard.write(LEFT_MAGNETO);
+            Keyboard.releaseAll();
+            break;  // Latch
+          case 1:
+            Keyboard.press(KEY_LEFT_SHIFT);
+            Keyboard.write(RIGHT_MAGNETO);
+            Keyboard.releaseAll();
+            break;  // Latch
           case 2: Keyboard.write(GEAR_UP); break;
           case 3: Keyboard.write(FLAPS_DOWN); break;
           case 4: Keyboard.write(CANOPY_CLOSE); break;
@@ -169,8 +178,16 @@ void handleKeypress() {
       Serial.print(". ");
       if (buttonState != previousButtonState[button]) {
         switch (button) {
-          case 0: Keyboard.write(LEFT_MAGNETO); break;
-          case 1: Keyboard.write(RIGHT_MAGNETO); break;
+          case 0:
+            Keyboard.press(KEY_LEFT_SHIFT);
+            Keyboard.write(LEFT_MAGNETO);
+            Keyboard.releaseAll();
+            break;
+          case 1:
+            Keyboard.press(KEY_LEFT_SHIFT);
+            Keyboard.write(RIGHT_MAGNETO);
+            Keyboard.releaseAll();
+            break;
           case 2: Keyboard.write(GEAR_DOWN); break;
           case 3: Keyboard.write(FLAPS_UP); break;
           case 4: Keyboard.write(CANOPY_OPEN); break;
