@@ -20,13 +20,13 @@ Each switch is connected between the IO expander and GND according to this circu
 
 The button mapping is defined in the char constants at the top of the code.
 
-A Run push button is connected between Pin D2 and GND on the Arduino which stops the code from running until it's pressed. Once the Micro is in keyboard mode it is difficult to flash it so this avoids coding accidents.  
+A guard push button is connected between Pin D2 and GND on the Arduino which stops the code from running until it's pressed. Once the Micro is in keyboard mode it is difficult to flash it so this avoids coding accidents.  
 
 # Installation
 - Copy or clone the Arduino code
 - Flash it to your Micro from the Arduino IDE
 - Connect the Micro to your PC with a micro-USB cable
-- Press the Run button
+- Press the Guard button
 - Open a terminal and test that the correct codes are being sent when the switches are activated
 - Run Flightgear and load the Spitfire IIa
 - Safe flying!
