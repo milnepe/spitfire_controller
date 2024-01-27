@@ -143,15 +143,15 @@ void handleKeypress() {
       if (buttonState != previousButtonState[button]) {
         switch (button) {
           case 0:
-            Serial.println(KEY_LEFT_SHIFT, HEX);
+            // Sends SHIFT + '[' sequence -> '{'
             Keyboard.press(KEY_LEFT_SHIFT);
             Keyboard.write(LEFT_MAGNETO);
-            Keyboard.releaseAll();
+            Keyboard.release(KEY_LEFT_SHIFT);
             break;  // Latch
           case 1:
             Keyboard.press(KEY_LEFT_SHIFT);
             Keyboard.write(RIGHT_MAGNETO);
-            Keyboard.releaseAll();
+            Keyboard.release(KEY_LEFT_SHIFT);
             break;  // Latch
           case 2: Keyboard.write(GEAR_UP); break;
           case 3: Keyboard.write(FLAPS_DOWN); break;
@@ -181,12 +181,12 @@ void handleKeypress() {
           case 0:
             Keyboard.press(KEY_LEFT_SHIFT);
             Keyboard.write(LEFT_MAGNETO);
-            Keyboard.releaseAll();
+            Keyboard.release(KEY_LEFT_SHIFT);
             break;
           case 1:
             Keyboard.press(KEY_LEFT_SHIFT);
             Keyboard.write(RIGHT_MAGNETO);
-            Keyboard.releaseAll();
+            Keyboard.release(KEY_LEFT_SHIFT);
             break;
           case 2: Keyboard.write(GEAR_DOWN); break;
           case 3: Keyboard.write(FLAPS_UP); break;
